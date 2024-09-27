@@ -1,26 +1,27 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { Provider } from "ethers";
-import Auth from "../components/Auth";
-import Wallet from "../components/Wallet";
-import { ReactNode } from "react";
-// import { Web3Provider as EthersWeb3Provider } from "@ethersproject/providers";
+"use client";
+import React, { useState } from "react";
 import { CustomWeb3Provider } from "@/Provider/Web3";
-// Extend the Window interface to include ethereum
-declare global {
-  interface Window {
-    ethereum: any;
-  }
-}
-
-// Define the type for the Web3 context
+import Auth from "@/components/Auth";
+import Wallet from "@/components/Wallet";
 
 const Home: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleAuthSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
   return (
     <CustomWeb3Provider>
-      <div>
-        <h1>Welcome to the Auth App</h1>
-        <Auth />
-        <Wallet />
+      <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+        <h1 className="text-3xl text-slate-950 font-bold mb-4">
+          Welcome to the Auth App
+        </h1>
+        {!isAuthenticated ? (
+          <Auth onAuthSuccess={handleAuthSuccess} />
+        ) : (
+          <Wallet />
+        )}
       </div>
     </CustomWeb3Provider>
   );

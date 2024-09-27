@@ -1,3 +1,4 @@
+"use client";
 import React, {
   createContext,
   useContext,
@@ -6,6 +7,12 @@ import React, {
   ReactNode,
 } from "react";
 import { Web3Provider as EthersWeb3Provider } from "@ethersproject/providers";
+
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
 
 interface Web3ContextType {
   provider: EthersWeb3Provider | null;

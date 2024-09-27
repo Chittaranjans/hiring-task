@@ -48,23 +48,28 @@ const Wallet = () => {
   };
 
   return (
-    <div>
-      <h2>Wallet</h2>
+    <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Wallet</h2>
       {account ? (
         <div>
-          <p>Account: {account}</p>
-          <p>Balance: {balance} ETH</p>
-          <h3>Tokens</h3>
-          <ul>
+          <p className="mb-2">Account: {account}</p>
+          <p className="mb-4">Balance: {balance} ETH</p>
+          <h3 className="text-xl font-semibold mb-2">Tokens</h3>
+          <ul className="list-disc pl-5">
             {tokens.map((token, index) => (
-              <li key={index}>
+              <li key={index} className="mb-1">
                 {token.name}: {token.balance}
               </li>
             ))}
           </ul>
         </div>
       ) : (
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <button
+          onClick={connectWallet}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+        >
+          Connect Wallet
+        </button>
       )}
     </div>
   );
