@@ -1,22 +1,29 @@
-import React from "react";
-import { Web3ReactProvider } from "@web3-react/core";
-import { Web3Provider } from "@ethersproject/providers";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { Provider } from "ethers";
 import Auth from "../components/Auth";
 import Wallet from "../components/Wallet";
-
-// Define the getLibrary function to return a Web3Provider instance
-function getLibrary(provider: any): Web3Provider {
-  return new Web3Provider(provider);
+import { ReactNode } from "react";
+// import { Web3Provider as EthersWeb3Provider } from "@ethersproject/providers";
+import { CustomWeb3Provider } from "@/Provider/Web3";
+// Extend the Window interface to include ethereum
+declare global {
+  interface Window {
+    ethereum: any;
+  }
 }
 
-export default function Home() {
+// Define the type for the Web3 context
+
+const Home: React.FC = () => {
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
+    <CustomWeb3Provider>
       <div>
         <h1>Welcome to the Auth App</h1>
         <Auth />
         <Wallet />
       </div>
-    </Web3ReactProvider>
+    </CustomWeb3Provider>
   );
-}
+};
+
+export default Home;

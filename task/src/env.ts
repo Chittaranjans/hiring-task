@@ -13,4 +13,5 @@ export const Env = {
   emailPassword: process.env.EMAIL_PASSWORD,
   serverAddress: process.env.SERVER_ADDRESS || "localhost",
   resetUrl: process.env.RESET_URL,
+  skipDbSetup: process.env.SKIP_DB_SETUP === 'false' ? false : true,
 };
